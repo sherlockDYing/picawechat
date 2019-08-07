@@ -1,5 +1,5 @@
 // Copyright 2016-2101 Pica.
-package com.yunqueyi.wechatstudy.response;
+package com.wechat_study.demo.response;
 
 import lombok.Data;
 

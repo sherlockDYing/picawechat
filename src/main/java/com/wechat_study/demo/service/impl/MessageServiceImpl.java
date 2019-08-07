@@ -1,7 +1,11 @@
 // Copyright 2016-2101 Pica.
-package com.yunqueyi.wechatstudy.service.impl;
+package com.wechat_study.demo.service.impl;
 
+import com.wechat_study.demo.model.MessageModel;
+import com.wechat_study.demo.service.MessagesService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @ClassName MessageServiceImpl
@@ -12,5 +16,9 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  */
 @Service
-public class MessageServiceImpl {
+public class MessageServiceImpl  implements MessagesService {
+    @Override
+    public List<MessageModel> getMessageList(int id) {
+        return null;
+    }
 }

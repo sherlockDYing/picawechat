@@ -1,8 +1,8 @@
 // Copyright 2016-2101 Pica.
-package com.yunqueyi.wechatstudy.controller;
+package com.wechat_study.demo.controller;
 
-import com.yunqueyi.wechatstudy.response.ApiResponse;
-import com.yunqueyi.wechatstudy.service.MessagesService;
+import com.wechat_study.demo.service.MessagesService;
+import com.wechat_study.demo.response.ApiResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;

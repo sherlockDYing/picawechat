@@ -1,7 +1,10 @@
 // Copyright 2016-2101 Pica.
-package com.yunqueyi.wechatstudy.service;
+package com.wechat_study.demo.service;
 
+import com.wechat_study.demo.model.MessageModel;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @ClassName MessagesService
@@ -13,4 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface MessagesService {
+
+    List<MessageModel> getMessageList(int id);
+
 }
