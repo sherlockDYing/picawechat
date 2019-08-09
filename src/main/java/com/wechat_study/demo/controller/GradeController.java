@@ -30,7 +30,7 @@ public class GradeController {
     @ApiOperation(value = "设置用户分数")
     public ApiResponse<?> setGrade(
             @ApiParam(name = "openid", value = "用户唯一标识", required = true, defaultValue = "0")
-            @RequestParam("openid") int openid,
+            @RequestParam("openid") String openid,
             @ApiParam(name = "bankId", value = "题库id", required = true, defaultValue = "0")
             @RequestParam("bankId") int bankId,
             @ApiParam(name = "grade", value = "成绩", required = true, defaultValue = "0")
@@ -39,5 +39,15 @@ public class GradeController {
         return new ApiResponse<>();
 
     }
+
+    @GetMapping(value = "resource")
+    public ApiResponse<?> getResource(
+            @ApiParam(name = "grade", value = "用户分数", required = true, defaultValue = "0")
+            @RequestParam("grade") int grade,
+            @ApiParam(name = "bankId", value = "题库ID", required = true, defaultValue = "0")
+            @RequestParam("bankId") int bankId) {
+        return new ApiResponse<>();
+    }
+
 
 }
