@@ -22,10 +22,6 @@ public class ApiResponse<T> implements Serializable {
 
   private String msg = "成功";
 
-  private String version = "1.0";
-
-  private Long timestamp = System.currentTimeMillis();
-
   private T data;
 
   public ApiResponse() {

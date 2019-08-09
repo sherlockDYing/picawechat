@@ -19,11 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/carousel")
 public class CarouselController {
 
-    @GetMapping(value = "")
-    @ApiOperation(value = "获取轮播列表")
-    public ApiResponse<?> getCarouselList(){
+    @GetMapping(value = "/article")
+    @ApiOperation(value = "获取轮播文章列表")
+    public ApiResponse<?> getCarouselArticleList() {
+        return new ApiResponse<>();
 
     }
+    @GetMapping(value = "/video")
+    @ApiOperation(value = "获取轮播视频")
+    public ApiResponse<?> getCarouselVideo() {
+        return new ApiResponse<>();
+
+    }
+
 
 
 }
