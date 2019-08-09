@@ -17,8 +17,10 @@ public class VideoModel {
      视频URL
      */
     private String url;
+    private String imgurl;
 
-    public VideoModel(String url) {
+    public VideoModel(String url,String imgurl) {
         this.url = url;
+        this.imgurl=url;
     }
 }
