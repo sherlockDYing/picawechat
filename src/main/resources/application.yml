@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    name: minidb
+    url:
+    username:
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  check-config-location: true
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.wechat_study.demo.entity
+
