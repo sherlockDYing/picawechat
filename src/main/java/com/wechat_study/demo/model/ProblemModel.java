@@ -19,34 +19,33 @@ public class ProblemModel {
      题库号
      */
     private int bankId;
-    /**
-     题号
-     */
-    private int number;
+
     /**
      题目名称
      */
-    private String question;
+    private String content;
     /**
      题目选项
      */
-    private List<OptionModel> options;
+    private List<String> options;
     /**
      题目答案
      */
-    private int answer;
+    private int answerOffset;
+
+    private String answer;
     /**
      题目分数
      */
-    private int score;
+    private int value;
 
-    public ProblemModel(int bankId, int number, String question, List<OptionModel> options, int answer, int score) {
+    public ProblemModel(int bankId, String content, List<String> options, int answerOffset,String answer, int value) {
         this.bankId = bankId;
-        this.number = number;
-        this.question = question;
+        this.content = content;
         this.options = options;
+        this.answerOffset = answerOffset;
         this.answer = answer;
-        this.score = score;
+        this.value = value;
     }
 
 }

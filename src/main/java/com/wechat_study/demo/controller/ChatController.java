@@ -32,6 +32,7 @@ public class ChatController {
     @ApiOperation(value = "获取题库列表")
     @GetMapping(value = "/bank_list")
     public ApiResponse<?> getBankList(){
+
         return new ApiResponse<>();
     }
 

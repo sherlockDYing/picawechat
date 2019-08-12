@@ -40,7 +40,8 @@ public class GradeController {
 
     }
 
-    @GetMapping(value = "resource")
+    @GetMapping(value = "/resource")
+    @ApiOperation(value = "根据用户分数和所做题库推荐相应资料")
     public ApiResponse<?> getResource(
             @ApiParam(name = "grade", value = "用户分数", required = true, defaultValue = "0")
             @RequestParam("grade") int grade,
