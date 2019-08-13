@@ -13,7 +13,7 @@ CREATE TABLE users_records (
 
 DROP TABLE IF EXISTS questions;
 CREATE TABLE questions(
-  question_id int NOT NULL ,
+  question_id int NOT NULL auto_increment,
   bankId int NOT NULL ,
   bank_name  varchar (50) ,
   contents varchar(600) NOT NULL ,
@@ -25,7 +25,7 @@ CREATE TABLE questions(
 
 DROP TABLE IF EXISTS links;
 CREATE TABLE links(
-  link_id varchar (20) NOT NULL ,
+  link_id int NOT NULL auto_increment,
   bankId int NOT NULL ,
   level  int NOT NULL ,
   url varchar (200) NOT NULL ,
@@ -35,7 +35,7 @@ CREATE TABLE links(
 
 DROP TABLE IF EXISTS test_records;
 CREATE TABLE test_records(
-  record_id varchar (20) NOT NULL ,
+  record_id int NOT NULL auto_increment ,
   openid varchar (50) NOT NULL ,
   bankId int NOT NULL ,
   score int NOT NULL ,
@@ -45,7 +45,7 @@ CREATE TABLE test_records(
 
 DROP TABLE IF EXISTS carousel_resources;
 CREATE TABLE  carousel_resources(
-  id int NOT NULL ,
+  id int NOT NULL auto_increment ,
   type int NOT NULL ,
   url varchar (200) NOT NULL ,
   label varchar (600) ,

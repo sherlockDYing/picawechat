@@ -56,13 +56,13 @@
             <generatedKey column="question_id" sqlStatement="MySql"></generatedKey>
         </table>
         <table tableName="links" domainObjectName="LinkEntity">
-            <generatedKey column="link_id" sqlStatement="MySql"></generatedKey>
+            <generatedKey column="link_id" sqlStatement="MySql" identity="true"></generatedKey>
         </table>
         <table tableName="test_records" domainObjectName="TestRecordEntity">
-            <generatedKey column="record_id" sqlStatement="MySql"></generatedKey>
+            <generatedKey column="record_id" sqlStatement="MySql" identity="true"></generatedKey>
         </table>
         <table tableName="carousel_resources" domainObjectName="CarouselResEntity">
-            <generatedKey column="id" sqlStatement="MySql"></generatedKey>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"></generatedKey>
         </table>
     </context>
 </generatorConfiguration>

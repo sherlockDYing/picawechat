@@ -60,7 +60,6 @@ public class GradeService {
 
 
     public boolean exits(String openid){
-        UserEntityExample.Criteria criteria = userEntityExample.createCriteria();
         if( userEntityMapper.selectByPrimaryKey(openid) == null ){
             return false;
         }else {
