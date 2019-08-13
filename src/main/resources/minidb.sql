@@ -28,11 +28,10 @@ DROP TABLE IF EXISTS links;
 CREATE TABLE links(
   link_id varchar (20) NOT NULL ,
   kind varchar (50) NOT NULL ,
-  score_low int NOT  NULL ,
-  score_high int NOT NULL ,
+  level  int NOT NULL ,
   url varchar (100) NOT NULL ,
   label varchar (600) ,
-  primary key ( link_id)
+  primary key (link_id)
 );
 
 DROP TABLE IF EXISTS test_records;
