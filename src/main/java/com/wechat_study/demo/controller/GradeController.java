@@ -1,10 +1,15 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.controller;
 
+import com.wechat_study.demo.entity.TestRecordEntity;
 import com.wechat_study.demo.response.ApiResponse;
+import com.wechat_study.demo.service.GradeService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @ClassName GradeQueryController
@@ -17,13 +22,20 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/grade")
 public class GradeController {
+    @Autowired
+    private GradeService gradeService;
 
     @GetMapping(value = "/query")
-    @ApiOperation(value = "查询用户成绩")
+    @ApiOperation(value = "查询用户成绩单")
     public ApiResponse<?> queryGrade(
             @ApiParam(name = "openid", value = "用户唯一标识", required = true, defaultValue = "0")
-            @RequestParam(value = "openid") int openid) {
+            @RequestParam(value = "openid") String openid) {
+        List<TestRecordEntity> recordEntities = gradeService.queryGrade(openid);
+        if(null == recordEntities){
         return new ApiResponse<>();
+        } else {
+            return new ApiResponse<>(recordEntities);
+        }
     }
 
     @GetMapping(value = "/set")
@@ -36,6 +48,7 @@ public class GradeController {
             @ApiParam(name = "grade", value = "成绩", required = true, defaultValue = "0")
             @RequestParam("grade") int grade
     ) {
+        gradeService.setGrade(openid,bankId,grade);
         return new ApiResponse<>();
 
     }

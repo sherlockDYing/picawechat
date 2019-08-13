@@ -50,14 +50,19 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="users" domainObjectName="UserEntity">
+        <table tableName="users_records" domainObjectName="UserEntity">
         </table>
         <table tableName="questions" domainObjectName="QuestionEntity">
+            <generatedKey column="question_id" sqlStatement="MySql"></generatedKey>
         </table>
         <table tableName="links" domainObjectName="LinkEntity">
+            <generatedKey column="link_id" sqlStatement="MySql"></generatedKey>
         </table>
         <table tableName="test_records" domainObjectName="TestRecordEntity">
             <generatedKey column="record_id" sqlStatement="MySql"></generatedKey>
+        </table>
+        <table tableName="carousel_resources" domainObjectName="CarouselResEntity">
+            <generatedKey column="id" sqlStatement="MySql"></generatedKey>
         </table>
     </context>
 </generatorConfiguration>
