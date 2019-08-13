@@ -57,6 +57,7 @@
         <table tableName="links" domainObjectName="LinkEntity">
         </table>
         <table tableName="test_records" domainObjectName="TestRecordEntity">
+            <generatedKey column="record_id" sqlStatement="MySql"></generatedKey>
         </table>
     </context>
 </generatorConfiguration>
