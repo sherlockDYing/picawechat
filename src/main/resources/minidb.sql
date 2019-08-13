@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS user_records;
 CREATE TABLE users_records (
   openid varchar(50) NOT NULL,
   username varchar(20),
-  identity int,
+  identity int,--0为无，1为医学生，2为普通用户
   primary key (openid)
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE test_records(
 DROP TABLE IF EXISTS carousel_resources;
 CREATE TABLE  carousel_resources(
   id int NOT NULL auto_increment ,
-  type int NOT NULL ,
+  type int NOT NULL ,--1为视频，2为文章
   url varchar (200) NOT NULL ,
   label varchar (600) ,
   primary key(id)
