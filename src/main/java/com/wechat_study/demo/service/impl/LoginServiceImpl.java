@@ -93,7 +93,7 @@ public class LoginServiceImpl implements LoginService {
      * @Params [requestUrl, requestMethod, outputStr]
      * @Return java.lang.String
      */
-    public String httpRequest(String url) {
+    private String httpRequest(String url) {
         String result = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {

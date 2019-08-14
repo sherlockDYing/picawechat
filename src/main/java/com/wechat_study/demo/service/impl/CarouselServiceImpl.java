@@ -46,8 +46,8 @@ public class CarouselServiceImpl implements CarouselService {
             rsList = new ArrayList<>();
             for (CarouselResEntity carouselResEntity : list) {
                 String url = carouselResEntity.getUrl();
-               // String imgurl = getImgPath(url);
-              //  rsList.add(new VideoModel(url,imgurl));
+                String imgurl = carouselResEntity.getImgurl();
+                rsList.add(new VideoModel(url, imgurl));
             }
         }
         return rsList;
