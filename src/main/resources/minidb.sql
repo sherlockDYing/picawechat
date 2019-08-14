@@ -74,6 +74,7 @@ CREATE TABLE  carousel_resources(
   id int NOT NULL auto_increment ,
   type int NOT NULL ,
   url varchar (200) NOT NULL ,
+  imgurl varchar (200) ,
   label varchar (600) ,
   primary key(id)
 );
