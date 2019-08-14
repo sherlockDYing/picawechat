@@ -17,6 +17,9 @@ public class VideoModel {
      视频URL
      */
     private String url;
+    /**
+     视频首帧图片URL
+     */
     private String imgurl;
 
     public VideoModel(String url,String imgurl) {

@@ -7,6 +7,7 @@ import com.wechat_study.demo.entity.UserEntity;
 import com.wechat_study.demo.entity.UserEntityExample;
 import com.wechat_study.demo.mapping.UserEntityMapper;
 import com.wechat_study.demo.service.LoginService;
+import com.wechat_study.demo.util.DbUtil;
 import com.wechat_study.demo.util.MyX509TrustManager;
 import com.wechat_study.demo.util.SessionUtil;
 import org.apache.ibatis.io.Resources;
@@ -54,10 +55,10 @@ public class LoginServiceImpl implements LoginService {
         String rs = httpRequest(url, "GET", null);
         JSONObject object = JSONObject.parseObject(rs);
         String openid = object.getString("openid");
-        UserEntity userEntity = getUser(openid);
+        UserEntity userEntity = DbUtil.getUser(openid);
         if (userEntity == null) {
             UserEntity userNew = new UserEntity(openid, openid, 0);
-            insertUser(userNew);
+            DbUtil.insertUser(userNew);
         }
         Map<String, String> map = new HashMap<>();
         map.put("openid", openid);
@@ -74,70 +75,20 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public Map<String, Integer> selectIdentity(String openid, int identity)  {
-        UserEntity userEntity = getUser(openid);
+        UserEntity userEntity = DbUtil.getUser(openid);
         Map<String, Integer> map = new HashMap<>();
         if (identity == 0) {
             map.put("identity", userEntity.getIdentity());
         } else {
             UserEntity userNew = new UserEntity(openid, openid, identity);
-            insertUser(userNew);
+            DbUtil.insertUser(userNew);
             map.put("identity", identity);
         }
         return map;
     }
 
-    /**
-     * @Description 根据openid向数据库查询user
-     * @Author caijia.rao
-     * @Date 2019/8/13 17:24
-     * @ModifyDate 2019/8/13 17:24
-     * @Params [openid]
-     * @Return com.wechat_study.demo.entity.UserEntity
-     */
-    private UserEntity getUser(String openid) {
-        SqlSession sqlSession = null;
-        UserEntity user = null;
-        try {
-            sqlSession = SessionUtil.getSqlSession();
-            UserEntityMapper userEntityMapper = sqlSession.getMapper(UserEntityMapper.class);
-            UserEntityExample example = new UserEntityExample();
-            UserEntityExample.Criteria criteria = example.createCriteria();
-            criteria.andOpenidEqualTo(openid);
-            user = userEntityMapper.selectByPrimaryKey(openid);
-        } catch (IOException e) {
-            System.out.println("get user error!");
-            e.printStackTrace();
-        } finally {
-            if (sqlSession != null) {
-                sqlSession.close();
-            }
-        }
-        return user;
-    }
 
-    /**
-     * @Description 向数据库插入user
-     * @Author caijia.rao
-     * @Date 2019/8/13 17:24
-     * @ModifyDate 2019/8/13 17:24
-     * @Params [userEntity]
-     * @Return void
-     */
-    private void insertUser(UserEntity userEntity) {
-        SqlSession sqlSession = null;
-        try {
-            sqlSession = SessionUtil.getSqlSession();
-            UserEntityMapper userEntityMapper = sqlSession.getMapper(UserEntityMapper.class);
-            userEntityMapper.insert(userEntity);
-        } catch (IOException e) {
-            System.out.println("insert error!");
-            e.printStackTrace();
-        } finally {
-            if (sqlSession != null) {
-                sqlSession.close();
-            }
-        }
-    }
+
 
     /**
      * @Description 向微信小程序服务器通过临时凭证获取用户openid
