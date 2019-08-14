@@ -52,8 +52,11 @@
         <!--生成对应表及类名-->
         <table tableName="users_records" domainObjectName="UserEntity">
         </table>
+        <table tableName="bank_info" domainObjectName="BankInfoEntity">
+            <generatedKey column="bankId" sqlStatement="MySql" identity="true"></generatedKey>
+        </table>
         <table tableName="questions" domainObjectName="QuestionEntity">
-            <generatedKey column="question_id" sqlStatement="MySql"></generatedKey>
+            <generatedKey column="question_id" sqlStatement="MySql" identity="true"></generatedKey>
         </table>
         <table tableName="links" domainObjectName="LinkEntity">
             <generatedKey column="link_id" sqlStatement="MySql" identity="true"></generatedKey>
