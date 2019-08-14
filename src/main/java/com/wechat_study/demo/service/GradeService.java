@@ -1,10 +1,8 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.service;
 
-import com.wechat_study.demo.entity.TestRecordEntity;
-import com.wechat_study.demo.entity.TestRecordEntityExample;
-import com.wechat_study.demo.entity.UserEntity;
-import com.wechat_study.demo.entity.UserEntityExample;
+import com.wechat_study.demo.entity.*;
+import com.wechat_study.demo.mapping.BankInfoEntityMapper;
 import com.wechat_study.demo.mapping.TestRecordEntityMapper;
 import com.wechat_study.demo.mapping.UserEntityMapper;
 import org.apache.ibatis.session.SqlSession;
@@ -29,10 +27,10 @@ public class GradeService {
     TestRecordEntityMapper testRecordEntityMapper;
     @Autowired
     UserEntityMapper userEntityMapper;
-
+    @Autowired
+    BankInfoEntityMapper bankInfoEntityMapper;
     TestRecordEntityExample testRecordEntityExample;
 
-    UserEntityExample userEntityExample;
 
     public List<TestRecordEntity> queryGrade(String openId) {
         testRecordEntityExample = new TestRecordEntityExample();
@@ -46,24 +44,32 @@ public class GradeService {
         }
     }
 
-    public void setGrade(String openid,int bankId, int score){
+    public int setGrade(String openid,int bankId, int score,int total){
         testRecordEntityExample = new TestRecordEntityExample();
         //查询用户是否存在
-        if(exits(openid)) {
+        if(!check(bankId)){
+            return -2;
+        }
+        if(!exits(openid)){
+            return -1;
+        }
+
             TestRecordEntity testRecordEntity = new TestRecordEntity();
             testRecordEntity.setOpenid(openid);
             testRecordEntity.setBankid(bankId);
             testRecordEntity.setScore(score);
-            testRecordEntityMapper.insertSelective(testRecordEntity);
+            testRecordEntity.setTotal(total);
+           if( testRecordEntityMapper.insertSelective(testRecordEntity) != 0){
+               return 1;
+           } else {
+            return 0;
         }
     }
 
 
-    public boolean exits(String openid){
-        if( userEntityMapper.selectByPrimaryKey(openid) == null ){
-            return false;
-        }else {
-            return true;
-        }
+    private boolean exits(String openid){
+        return ( userEntityMapper.selectByPrimaryKey(openid) != null );
     }
+
+    private boolean check(int bankId){return bankInfoEntityMapper.selectByPrimaryKey(bankId)!=null;}
 }
