@@ -6,7 +6,6 @@ import com.wechat_study.demo.model.ArticleModel;
 import com.wechat_study.demo.model.VideoModel;
 import com.wechat_study.demo.service.CarouselService;
 import com.wechat_study.demo.util.DbUtil;
-import com.wechat_study.demo.util.VideoUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,23 +46,12 @@ public class CarouselServiceImpl implements CarouselService {
             rsList = new ArrayList<>();
             for (CarouselResEntity carouselResEntity : list) {
                 String url = carouselResEntity.getUrl();
-                String imgurl = getImgPath(url);
-                rsList.add(new VideoModel(url,imgurl));
+               // String imgurl = getImgPath(url);
+              //  rsList.add(new VideoModel(url,imgurl));
             }
         }
         return rsList;
     }
 
-    private String getImgPath(String videoPath) {
-        String targetPath = "";
-        String imgName = videoPath.substring(videoPath.lastIndexOf("/") + 1, videoPath.lastIndexOf(".")) + ".png";
-        try {
-            targetPath = VideoUtil.randomGrabberFFmpegVideoImage(videoPath, imgName, VideoUtil.MOD);
-        } catch (Exception e) {
-            System.out.println("get target path error!");
-            e.printStackTrace();
-        }
-        return targetPath;
-    }
 
 }
