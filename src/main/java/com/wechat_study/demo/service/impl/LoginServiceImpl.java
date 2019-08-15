@@ -1,10 +1,12 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wechat_study.demo.entity.UserEntity;
+import com.wechat_study.demo.entity.UserEntityExample;
+import com.wechat_study.demo.mapping.UserEntityMapper;
 import com.wechat_study.demo.service.LoginService;
-import com.wechat_study.demo.util.DbUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
@@ -12,8 +14,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.io.*;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,31 +37,34 @@ public class LoginServiceImpl implements LoginService {
 
     private final String REQUEST_SUCCESS = "0";
 
+    @Autowired
+    UserEntityMapper userEntityMapper;
+
+    UserEntityExample userEntityExample;
+
     /**
      * @Description 根据临时凭证获取openid并判断是否已有该用户，如果没有则新建数据库该用户
      * @Author caijia.rao
      * @Date 2019/8/13 17:54
      * @ModifyDate 2019/8/13 17:54
      * @Params [code]
-     * @Return java.util.Map<java.lang.String, java.lang.String>
+     * @Return java.util.Map<java.lang.String ,   java.lang.String>
      */
     @Override
     public Map<String, String> getOpenid(String code) {
+        JSONObject js = JSON.parseObject(code);
+        String js_code = js.getString("code");
         String params = "appid=" + APP_ID + "&secret=" + APP_SECRET + "&js_code="
-                + code + "&grant_type=authorization_code";
+                + js_code + "&grant_type=authorization_code";
         String url = PRE_URL + params;
         String rs = httpRequest(url);
         JSONObject object = JSONObject.parseObject(rs);
-        String error_code = object.getString("errcode");
         Map<String, String> map = new HashMap<>();
         String openid = object.getString("openid");
-        if (REQUEST_SUCCESS.equals(error_code)) {
-            UserEntity userEntity = DbUtil.getUser(openid);
-            if (userEntity == null) {
-                UserEntity userNew = new UserEntity(openid, openid, 0);
-                DbUtil.insertUser(userNew);
-            }
-
+        if (openid != null) {
+           if( userEntityMapper.selectByPrimaryKey(openid) == null){
+               userEntityMapper.insert(new UserEntity(openid,null,0));
+           }
         }
         map.put("openid", openid);
         return map;
@@ -69,17 +76,18 @@ public class LoginServiceImpl implements LoginService {
      * @Date 2019/8/13 17:56
      * @ModifyDate 2019/8/13 17:56
      * @Params [openid, identity]
-     * @Return java.util.Map<java.lang.String, java.lang.Integer>
+     * @Return java.util.Map<java.lang.String ,   java.lang.Integer>
      */
     @Override
     public Map<String, Integer> selectIdentity(String openid, int identity) {
-        UserEntity userEntity = DbUtil.getUser(openid);
+
+       UserEntity userEntity =  userEntityMapper.selectByPrimaryKey(openid);
         Map<String, Integer> map = new HashMap<>();
         if (identity == 0) {
             map.put("identity", userEntity.getIdentity());
         } else {
-            UserEntity userNew = new UserEntity(openid, openid, identity);
-            DbUtil.insertUser(userNew);
+            UserEntity userNew = new UserEntity(openid, null, identity);
+            userEntityMapper.updateByPrimaryKey(userNew);
             map.put("identity", identity);
         }
         return map;
@@ -93,7 +101,7 @@ public class LoginServiceImpl implements LoginService {
      * @Params [requestUrl, requestMethod, outputStr]
      * @Return java.lang.String
      */
-    private String httpRequest(String url) {
+    public String httpRequest(String url) {
         String result = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {

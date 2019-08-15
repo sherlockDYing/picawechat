@@ -24,15 +24,15 @@ public class DemoApplicationTests {
     public void testHttpConnect() {
         String url = "https://api.weixin.qq.com/sns/jscode2session?"
                 + "appid=wx532d861b9298c91b&secret=5b222b1a2dc22b12d1c8f3443fb1cae4"
-                +"&js_code=011Jz9Gj25LoHE0Qz3Hj2AC5Gj2Jz9G7&grant_type=authorization_code";
-//        LoginServiceImpl loginService = new LoginServiceImpl();
-//        String rs = loginService.httpRequest(url);
-//        System.out.println("rs"+rs);
-//        JSONObject object = JSONObject.parseObject(rs);
-//        String error_code = object.getString("errcode");
-//        System.out.println("error code="+error_code);
-//        String openid = object.getString("openid");
-//        System.out.println("openid="+openid);
+                +"&js_code=021RgJzb1gP9Dx0qiMzb16iszb1RgJzn&grant_type=authorization_code";
+        LoginServiceImpl loginService = new LoginServiceImpl();
+        String rs = loginService.httpRequest(url);
+        System.out.println("rs"+rs);
+        JSONObject object = JSONObject.parseObject(rs);
+        String error_code = object.getString("errcode");
+        System.out.println("error code="+error_code);
+        String openid = object.getString("openid");
+        System.out.println("openid="+openid);
     }
 
 

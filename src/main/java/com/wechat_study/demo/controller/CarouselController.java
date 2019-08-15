@@ -1,8 +1,8 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.controller;
 
-import com.wechat_study.demo.model.ArticleModel;
-import com.wechat_study.demo.model.VideoModel;
+import com.wechat_study.demo.entity.ArticleResEntity;
+import com.wechat_study.demo.entity.VideoResEntity;
 import com.wechat_study.demo.response.ApiResponse;
 import com.wechat_study.demo.service.CarouselService;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +32,7 @@ public class CarouselController {
     @GetMapping(value = "/article")
     @ApiOperation(value = "获取轮播文章列表")
     public ApiResponse<?> getCarouselArticleList() {
-        Map<String, List<ArticleModel>> map = new HashMap<>();
+        Map<String, List<ArticleResEntity>> map = new HashMap<>();
         map.put("list", carouselService.getArticleList());
         return new ApiResponse<>(map);
 
@@ -41,7 +41,7 @@ public class CarouselController {
     @GetMapping(value = "/video")
     @ApiOperation(value = "获取轮播视频")
     public ApiResponse<?> getCarouselVideo() {
-        Map<String,List<VideoModel>> map = new HashMap<>();
+        Map<String,List<VideoResEntity>> map = new HashMap<>();
         map.put("list",carouselService.getVideoList());
         return new ApiResponse<>(map);
 

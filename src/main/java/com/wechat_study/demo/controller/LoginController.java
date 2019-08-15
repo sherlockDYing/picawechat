@@ -6,10 +6,7 @@ import com.wechat_study.demo.service.LoginService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,9 +37,9 @@ public class LoginController {
     @PostMapping(value = "/identity")
     public ApiResponse<?> selectIdentity(
             @ApiParam(name = "openid", value = "用户唯一标识openid", required = true, defaultValue = "openid")
-            @RequestBody String openid,
+            @RequestParam String openid,
             @ApiParam(name = "identity", value = "用户选择身份, 0获取身份信息，1设置身份信息", required = true, defaultValue = "0")
-            @RequestBody int identity) {
+            @RequestParam int identity) {
         return new ApiResponse<>(loginService.selectIdentity(openid, identity));
     }
 

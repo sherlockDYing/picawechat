@@ -1,14 +1,16 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.service.impl;
 
-import com.wechat_study.demo.entity.CarouselResEntity;
-import com.wechat_study.demo.model.ArticleModel;
-import com.wechat_study.demo.model.VideoModel;
+import com.wechat_study.demo.entity.ArticleResEntity;
+import com.wechat_study.demo.entity.ArticleResEntityExample;
+import com.wechat_study.demo.entity.VideoResEntity;
+import com.wechat_study.demo.entity.VideoResEntityExample;
+import com.wechat_study.demo.mapping.ArticleResEntityMapper;
+import com.wechat_study.demo.mapping.VideoResEntityMapper;
 import com.wechat_study.demo.service.CarouselService;
-import com.wechat_study.demo.util.DbUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,36 +24,28 @@ import java.util.List;
 @Service
 public class CarouselServiceImpl implements CarouselService {
 
-    private final int ARTICLE_TYPE = 2;
-    private final int VIDEO_TYPE = 1;
+    @Autowired
+    ArticleResEntityMapper articleResEntityMapper;
+    ArticleResEntityExample articleResEntityExample;
+    @Autowired
+    VideoResEntityMapper videoResEntityMapper;
+    VideoResEntityExample videoResEntityExample;
 
     @Override
-    public List<ArticleModel> getArticleList() {
-        List<CarouselResEntity> list = DbUtil.getCarouselRes(ARTICLE_TYPE);
-        List<ArticleModel> rsList = null;
-        if (list.size() != 0) {
-            rsList = new ArrayList<>();
-            for (CarouselResEntity carouselResEntity : list) {
-                rsList.add(new ArticleModel(carouselResEntity.getUrl(), carouselResEntity.getLabel()));
-            }
-        }
-        return rsList;
+    public List<ArticleResEntity> getArticleList() {
+        articleResEntityExample = new ArticleResEntityExample();
+        ArticleResEntityExample.Criteria criteria = articleResEntityExample.createCriteria();
+        criteria.andUrlIsNotNull();
+        List<ArticleResEntity> list = articleResEntityMapper.selectByExample(articleResEntityExample);
+        return list;
     }
 
     @Override
-    public List<VideoModel> getVideoList() {
-        List<CarouselResEntity> list = DbUtil.getCarouselRes(VIDEO_TYPE);
-        List<VideoModel> rsList = null;
-        if (list.size() != 0) {
-            rsList = new ArrayList<>();
-            for (CarouselResEntity carouselResEntity : list) {
-                String url = carouselResEntity.getUrl();
-                String imgurl = carouselResEntity.getImgurl();
-                rsList.add(new VideoModel(url, imgurl));
-            }
-        }
-        return rsList;
+    public List<VideoResEntity> getVideoList() {
+        videoResEntityExample = new VideoResEntityExample();
+        VideoResEntityExample.Criteria criteria = videoResEntityExample.createCriteria();
+        criteria.andUrlIsNotNull();
+        List<VideoResEntity> list = videoResEntityMapper.selectByExample(videoResEntityExample);
+        return list;
     }
-
-
 }

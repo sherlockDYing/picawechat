@@ -64,7 +64,10 @@
         <table tableName="test_records" domainObjectName="TestRecordEntity">
             <generatedKey column="record_id" sqlStatement="MySql" identity="true"></generatedKey>
         </table>
-        <table tableName="carousel_resources" domainObjectName="CarouselResEntity">
+        <table tableName="article_resources" domainObjectName="ArticleResEntity">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"></generatedKey>
+        </table>
+        <table tableName="video_resources" domainObjectName="VideoResEntity">
             <generatedKey column="id" sqlStatement="MySql" identity="true"></generatedKey>
         </table>
     </context>

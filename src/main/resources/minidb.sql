@@ -45,7 +45,7 @@ CREATE TABLE links(
   link_id int NOT NULL auto_increment,
   bankId int NOT NULL ,
   level  int NOT NULL ,
-  url varchar (200) NOT NULL ,
+  url varchar (400) NOT NULL ,
   label varchar (600) ,
   primary key (link_id) ,
   constraint bank_id_info
@@ -69,13 +69,18 @@ CREATE TABLE test_records(
   foreign key (bankId) references bank_info(bankId)
 );
 
-DROP TABLE IF EXISTS carousel_resources;
-CREATE TABLE  carousel_resources(
+DROP TABLE IF EXISTS video_resources;
+CREATE TABLE  video_resources(
   id int NOT NULL auto_increment ,
-  type int NOT NULL ,--1为视频，2为文章
-  url varchar (200) NOT NULL ,
-  imgurl varchar (200) ,
+  url varchar (400) NOT NULL ,
+  imgurl varchar (400) ,
   label varchar (600) ,
   primary key(id)
 );
-
+DROP TABLE IF EXISTS article_resources;
+CREATE TABLE  article_resources(
+  id int NOT NULL auto_increment ,
+  url varchar (400) NOT NULL ,
+  label varchar (600) ,
+  primary key(id)
+);

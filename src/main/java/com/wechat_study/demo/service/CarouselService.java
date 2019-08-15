@@ -2,8 +2,9 @@
 package com.wechat_study.demo.service;
 
 
-import com.wechat_study.demo.model.ArticleModel;
-import com.wechat_study.demo.model.VideoModel;
+import com.wechat_study.demo.entity.ArticleResEntity;
+import com.wechat_study.demo.entity.VideoResEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,12 +16,8 @@ import java.util.List;
  * @ModifyDate 2019/8/13 18:10
  * @Version 1.0
  */
+@Service
 public interface CarouselService {
-    List<ArticleModel> getArticleList();
-
-
-    List<VideoModel> getVideoList();
-
-
-
+    List<ArticleResEntity> getArticleList();
+    List<VideoResEntity> getVideoList();
 }

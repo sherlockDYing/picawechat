@@ -1,6 +1,8 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.service;
 
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import java.util.Map;
  * @ModifyDate 2019/8/13 9:49
  * @Version 1.0
  */
+@Service
 public interface LoginService {
 
     Map<String, String> getOpenid(String code);
