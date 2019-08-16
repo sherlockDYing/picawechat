@@ -1,11 +1,8 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.service.impl;
 
-import com.wechat_study.demo.entity.ArticleResEntity;
-import com.wechat_study.demo.entity.ArticleResEntityExample;
 import com.wechat_study.demo.entity.VideoResEntity;
 import com.wechat_study.demo.entity.VideoResEntityExample;
-import com.wechat_study.demo.mapping.ArticleResEntityMapper;
 import com.wechat_study.demo.mapping.VideoResEntityMapper;
 import com.wechat_study.demo.service.CarouselService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +22,8 @@ import java.util.List;
 public class CarouselServiceImpl implements CarouselService {
 
     @Autowired
-    ArticleResEntityMapper articleResEntityMapper;
-    ArticleResEntityExample articleResEntityExample;
-    @Autowired
-    VideoResEntityMapper videoResEntityMapper;
-    VideoResEntityExample videoResEntityExample;
-
-    @Override
-    public List<ArticleResEntity> getArticleList() {
-        articleResEntityExample = new ArticleResEntityExample();
-        ArticleResEntityExample.Criteria criteria = articleResEntityExample.createCriteria();
-        criteria.andUrlIsNotNull();
-        List<ArticleResEntity> list = articleResEntityMapper.selectByExample(articleResEntityExample);
-        return list;
-    }
+    private VideoResEntityMapper videoResEntityMapper;
+    private VideoResEntityExample videoResEntityExample;
 
     @Override
     public List<VideoResEntity> getVideoList() {

@@ -6,9 +6,11 @@ import com.wechat_study.demo.entity.VideoResEntity;
 import com.wechat_study.demo.response.ApiResponse;
 import com.wechat_study.demo.service.CarouselService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -29,22 +31,11 @@ public class CarouselController {
     @Autowired
     private CarouselService carouselService;
 
-
-
-    @GetMapping(value = "/article")
-    @ApiOperation(value = "获取轮播文章列表")
-    public ApiResponse<?> getCarouselArticleList() {
-        Map<String, List<ArticleResEntity>> map = new HashMap<>();
-        map.put("list", carouselService.getArticleList());
-        return new ApiResponse<>(map);
-
-    }
-
     @GetMapping(value = "/video")
     @ApiOperation(value = "获取轮播视频")
     public ApiResponse<?> getCarouselVideo() {
-        Map<String,List<VideoResEntity>> map = new HashMap<>();
-        map.put("list",carouselService.getVideoList());
+        Map<String, List<VideoResEntity>> map = new HashMap<>();
+        map.put("list", carouselService.getVideoList());
         return new ApiResponse<>(map);
 
     }
