@@ -59,7 +59,7 @@ public class ClassRoomService implements ClassRoomServiceIn {
         if (typeId == 0) {
             criteria.andIdIsNotNull();
         } else {
-            criteria.andIdEqualTo(typeId);
+            criteria.andTypeIdEqualTo(typeId);
         }
         List<ArticleResEntity> articleResEntityList = articleResEntityMapper.selectByExample(articleResEntityExample);
         List<ArticleResEntity> rsList = null;
