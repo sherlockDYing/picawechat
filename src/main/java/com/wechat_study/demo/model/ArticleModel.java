@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @ClassName ArticleModel
- * @Description 文章bean
+ * @Description 文章model
  * @Author caijia.rao
  * @Date 2019/8/16 11:33
  * @ModifyDate 2019/8/16 11:33

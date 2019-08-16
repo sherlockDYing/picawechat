@@ -4,7 +4,6 @@ package com.wechat_study.demo.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wechat_study.demo.entity.UserEntity;
-import com.wechat_study.demo.entity.UserEntityExample;
 import com.wechat_study.demo.mapping.UserEntityMapper;
 import com.wechat_study.demo.service.LoginService;
 import org.apache.http.HttpEntity;
@@ -35,21 +34,9 @@ public class LoginServiceImpl implements LoginService {
     private final String APP_ID = "wx532d861b9298c91b";
     private final String PRE_URL = "https://api.weixin.qq.com/sns/jscode2session?";
 
-    private final String REQUEST_SUCCESS = "0";
-
     @Autowired
     UserEntityMapper userEntityMapper;
 
-    UserEntityExample userEntityExample;
-
-    /**
-     * @Description 根据临时凭证获取openid并判断是否已有该用户，如果没有则新建数据库该用户
-     * @Author caijia.rao
-     * @Date 2019/8/13 17:54
-     * @ModifyDate 2019/8/13 17:54
-     * @Params [code]
-     * @Return java.util.Map<java.lang.String ,   java.lang.String>
-     */
     @Override
     public Map<String, String> getOpenid(String code) {
         JSONObject js = JSON.parseObject(code);
@@ -62,26 +49,19 @@ public class LoginServiceImpl implements LoginService {
         Map<String, String> map = new HashMap<>();
         String openid = object.getString("openid");
         if (openid != null) {
-           if( userEntityMapper.selectByPrimaryKey(openid) == null){
-               userEntityMapper.insert(new UserEntity(openid,null,0));
-           }
+            if (userEntityMapper.selectByPrimaryKey(openid) == null) {
+                userEntityMapper.insert(new UserEntity(openid, null, 0));
+            }
         }
         map.put("openid", openid);
         return map;
     }
 
-    /**
-     * @Description 根据openid查找用户，identity为0为查询，不为0为设置
-     * @Author caijia.rao
-     * @Date 2019/8/13 17:56
-     * @ModifyDate 2019/8/13 17:56
-     * @Params [openid, identity]
-     * @Return java.util.Map<java.lang.String ,   java.lang.Integer>
-     */
+
     @Override
     public Map<String, Integer> selectIdentity(String openid, int identity) {
 
-       UserEntity userEntity =  userEntityMapper.selectByPrimaryKey(openid);
+        UserEntity userEntity = userEntityMapper.selectByPrimaryKey(openid);
         Map<String, Integer> map = new HashMap<>();
         if (identity == 0) {
             map.put("identity", userEntity.getIdentity());

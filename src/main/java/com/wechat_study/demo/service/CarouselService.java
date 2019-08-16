@@ -1,10 +1,7 @@
 // Copyright 2016-2101 Pica.
 package com.wechat_study.demo.service;
 
-
-import com.wechat_study.demo.entity.ArticleResEntity;
 import com.wechat_study.demo.entity.VideoResEntity;
-import com.wechat_study.demo.model.ArticleModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +16,14 @@ import java.util.List;
  */
 @Service
 public interface CarouselService {
-    List<ArticleResEntity> getArticleList(int type);
 
-    List<ArticleModel> getArticleTypeList();
+    /**
+     * @Description 获取轮播视频列表
+     * @Author caijia.rao
+     * @Date 2019/8/16 15:59
+     * @ModifyDate 2019/8/16 15:59
+     * @Params []
+     * @Return java.util.List<com.wechat_study.demo.entity.VideoResEntity>
+     */
     List<VideoResEntity> getVideoList();
 }
