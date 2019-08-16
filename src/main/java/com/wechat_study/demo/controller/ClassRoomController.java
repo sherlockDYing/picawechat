@@ -2,7 +2,6 @@
 package com.wechat_study.demo.controller;
 
 import com.wechat_study.demo.entity.ArticleResEntity;
-import com.wechat_study.demo.model.ArticleModel;
 import com.wechat_study.demo.model.ArticleTypeModel;
 import com.wechat_study.demo.response.ApiResponse;
 import com.wechat_study.demo.service.impl.ClassRoomService;
@@ -45,8 +44,8 @@ public class ClassRoomController {
     @ApiOperation(value = "按类型名获取文章列表")
     public ApiResponse<?> getArticleByType(
             @RequestParam("typeId") int typeId) {
-        List<ArticleModel> list = classRoomService.getArticleByType(typeId);
-        Map<String, List<ArticleModel>> map = new HashMap<>();
+        List<ArticleResEntity> list = classRoomService.getArticleByType(typeId);
+        Map<String, List<ArticleResEntity>> map = new HashMap<>();
         map.put("list", list);
         return new ApiResponse<>(map);
     }

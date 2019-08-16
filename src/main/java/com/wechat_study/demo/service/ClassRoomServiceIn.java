@@ -2,8 +2,6 @@
 package com.wechat_study.demo.service;
 
 import com.wechat_study.demo.entity.ArticleResEntity;
-import com.wechat_study.demo.entity.ResTypeInfoEntity;
-import com.wechat_study.demo.model.ArticleModel;
 import com.wechat_study.demo.model.ArticleTypeModel;
 
 import java.util.List;
@@ -28,14 +26,14 @@ public interface ClassRoomServiceIn {
     List<ArticleTypeModel> getTypeList();
 
     /**
-     * @Description 云鹊小讲堂根据分类获取文章列表
-     * @Author caijia.rao
-     * @Date 2019/8/16 15:15
-     * @ModifyDate 2019/8/16 15:15
-     * @Params []
-     * @Return java.util.List<com.wechat_study.demo.model.ArticleModel>
-     */
-    List<ArticleModel> getArticleByType(int typeId);
+    *@Description 云鹊小讲堂根据分类获取文章列表
+    *@Author caijia.rao
+    *@Date 2019/8/16 16:07
+    *@ModifyDate 2019/8/16 16:07
+    *@Params [typeId]
+    *@Return java.util.List<com.wechat_study.demo.entity.ArticleResEntity>
+    */
+    List<ArticleResEntity> getArticleByType(int typeId);
 
     /**
      * @Description TODO 云鹊小讲堂根据关键字匹配搜索文章

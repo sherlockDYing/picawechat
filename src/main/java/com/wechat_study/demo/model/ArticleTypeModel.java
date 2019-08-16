@@ -14,11 +14,11 @@ import lombok.Data;
 @Data
 public class ArticleTypeModel {
     private int id;
-    private String name;
+    private String type;
 
-    public ArticleTypeModel(int id, String name) {
+    public ArticleTypeModel(int id, String type) {
         this.id = id;
-        this.name = name;
+        this.type = type;
     }
 
 }

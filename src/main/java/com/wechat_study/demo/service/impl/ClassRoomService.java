@@ -7,7 +7,6 @@ import com.wechat_study.demo.entity.ResTypeInfoEntity;
 import com.wechat_study.demo.entity.ResTypeInfoEntityExample;
 import com.wechat_study.demo.mapping.ArticleResEntityMapper;
 import com.wechat_study.demo.mapping.ResTypeInfoEntityMapper;
-import com.wechat_study.demo.model.ArticleModel;
 import com.wechat_study.demo.model.ArticleTypeModel;
 import com.wechat_study.demo.service.ClassRoomServiceIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class ClassRoomService implements ClassRoomServiceIn {
     }
 
     @Override
-    public List<ArticleModel> getArticleByType(int typeId) {
+    public List<ArticleResEntity> getArticleByType(int typeId) {
         articleResEntityExample = new ArticleResEntityExample();
         ArticleResEntityExample.Criteria criteria = articleResEntityExample.createCriteria();
         if (typeId == 0) {
@@ -63,12 +62,12 @@ public class ClassRoomService implements ClassRoomServiceIn {
             criteria.andIdEqualTo(typeId);
         }
         List<ArticleResEntity> articleResEntityList = articleResEntityMapper.selectByExample(articleResEntityExample);
-        List<ArticleModel> rsList = null;
+        List<ArticleResEntity> rsList = null;
         if (articleResEntityList != null) {
             rsList = new ArrayList<>();
             for (ArticleResEntity articleResEntity : articleResEntityList) {
-                rsList.add(new ArticleModel(articleResEntity.getId(),
-                        articleResEntity.getUrl(), articleResEntity.getLabel()));
+                rsList.add(new ArticleResEntity(articleResEntity.getId(),
+                        articleResEntity.getUrl(),articleResEntity.getLabel(),articleResEntity.getTypeId()));
             }
         }
 
