@@ -1,5 +1,5 @@
 // Copyright 2016-2101 Pica.
-package com.wechat_study.demo.service;
+package com.wechat_study.demo.service.impl;
 
 import com.wechat_study.demo.entity.BankInfoEntity;
 import com.wechat_study.demo.entity.BankInfoEntityExample;
