@@ -48,7 +48,8 @@ public class ClassRoomController {
 
     @GetMapping(value = "/searchByKeyword")
     public ApiResponse<?> searchArticleByKey(
+            @RequestParam("typeId") int typeId,
             @RequestParam("key") String key){
-        return new ApiResponse<>();
+        return new ApiResponse<>(classRoomService.searchArticleByKey(typeId,key));
     }
 }

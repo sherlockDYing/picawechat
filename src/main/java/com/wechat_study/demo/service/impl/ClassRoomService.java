@@ -2,6 +2,7 @@
 package com.wechat_study.demo.service.impl;
 
 import com.wechat_study.demo.entity.ArticleResEntity;
+import com.wechat_study.demo.entity.ArticleResEntityExample;
 import com.wechat_study.demo.entity.ResTypeInfoEntity;
 import com.wechat_study.demo.mapping.ArticleResEntityMapper;
 import com.wechat_study.demo.mapping.ResTypeInfoEntityMapper;
@@ -38,7 +39,15 @@ public class ClassRoomService implements ClassRoomServiceIn {
     }
 
     @Override
-    public List<ArticleResEntity> searchArticleByKey() {
-        return null;
+    public List<ArticleResEntity> searchArticleByKey(int typeId,String key) {
+        ArticleResEntityExample articleResEntityExample = new ArticleResEntityExample();
+        ArticleResEntityExample.Criteria criteria = articleResEntityExample.createCriteria();
+        if(typeId == 0){
+        criteria.andLabelLike("%"+key+"%");
+        }else {
+            criteria.andLabelLike("%"+key+"%")
+                    .andTypeIdEqualTo(typeId);
+        }
+        return articleResEntityMapper.selectByExample(articleResEntityExample);
     }
 }

@@ -43,5 +43,5 @@ public interface ClassRoomServiceIn {
      *@Params []
      *@Return java.util.List<com.wechat_study.demo.entity.ArticleResEntity>
      */
-    List<ArticleResEntity> searchArticleByKey();
+    List<ArticleResEntity> searchArticleByKey(int typeId,String key);
 }
