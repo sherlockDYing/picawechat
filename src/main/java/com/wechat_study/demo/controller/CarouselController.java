@@ -6,9 +6,11 @@ import com.wechat_study.demo.entity.VideoResEntity;
 import com.wechat_study.demo.response.ApiResponse;
 import com.wechat_study.demo.service.CarouselService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -30,19 +32,30 @@ public class CarouselController {
     private CarouselService carouselService;
 
     @GetMapping(value = "/article")
-    @ApiOperation(value = "获取轮播文章列表")
-    public ApiResponse<?> getCarouselArticleList() {
+    @ApiOperation(value = "获取某类别轮播文章列表")
+    public ApiResponse<?> getCarouselArticleList(
+            @ApiParam(value = "文章类别", name = "type", required = true, defaultValue = "1")
+            @RequestParam("type") int type
+    ) {
         Map<String, List<ArticleResEntity>> map = new HashMap<>();
-        map.put("list", carouselService.getArticleList());
+        map.put("list", carouselService.getArticleList(type));
         return new ApiResponse<>(map);
 
     }
 
+    @ApiOperation(value = "获取文章类别列表")
+    @GetMapping(value = "/article/list")
+    public ApiResponse<?> getArticleTypeList() {
+
+        return new ApiResponse<>();
+    }
+
+
     @GetMapping(value = "/video")
     @ApiOperation(value = "获取轮播视频")
     public ApiResponse<?> getCarouselVideo() {
-        Map<String,List<VideoResEntity>> map = new HashMap<>();
-        map.put("list",carouselService.getVideoList());
+        Map<String, List<VideoResEntity>> map = new HashMap<>();
+        map.put("list", carouselService.getVideoList());
         return new ApiResponse<>(map);
 
     }
