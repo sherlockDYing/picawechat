@@ -2,6 +2,7 @@
 package com.wechat_study.demo.controller;
 
 import com.wechat_study.demo.entity.ArticleResEntity;
+import com.wechat_study.demo.model.ArticleTypeModel;
 import com.wechat_study.demo.response.ApiResponse;
 import com.wechat_study.demo.service.impl.ClassRoomService;
 import io.swagger.annotations.ApiOperation;
@@ -33,23 +34,27 @@ public class ClassRoomController {
     @GetMapping(value = "/bar")
     @ApiOperation(value = "获取分类列表")
     public ApiResponse<?> getTypeList() {
-        Map<String, List<ArticleResEntity>> map = new HashMap<>();
-
+        Map<String, List<ArticleTypeModel>> map = new HashMap<>();
+        List<ArticleTypeModel> list = classRoomService.getTypeList();
+        map.put("list", list);
         return new ApiResponse<>(map);
     }
 
     @GetMapping(value = "/searchByType")
     @ApiOperation(value = "按类型名获取文章列表")
     public ApiResponse<?> getArticleByType(
-    @RequestParam("typeId") int typeId){
-        return new ApiResponse<>();
+            @RequestParam("typeId") int typeId) {
+        Map<String, List<ArticleResEntity>> map = new HashMap<>();
+        List<ArticleResEntity> list = classRoomService.getArticleByType(typeId);
+        map.put("list", list);
+        return new ApiResponse<>(map);
     }
 
 
     @GetMapping(value = "/searchByKeyword")
     public ApiResponse<?> searchArticleByKey(
             @RequestParam("typeId") int typeId,
-            @RequestParam("key") String key){
-        return new ApiResponse<>(classRoomService.searchArticleByKey(typeId,key));
+            @RequestParam("key") String key) {
+        return new ApiResponse<>(classRoomService.searchArticleByKey(typeId, key));
     }
 }
