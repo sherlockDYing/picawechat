@@ -2,7 +2,7 @@
 package com.wechat_study.demo.controller;
 
 import com.wechat_study.demo.response.ApiResponse;
-import com.wechat_study.demo.service.ChatService;
+import com.wechat_study.demo.service.impl.ChatService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;

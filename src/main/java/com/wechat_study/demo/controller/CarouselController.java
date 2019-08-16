@@ -29,6 +29,8 @@ public class CarouselController {
     @Autowired
     private CarouselService carouselService;
 
+
+
     @GetMapping(value = "/article")
     @ApiOperation(value = "获取轮播文章列表")
     public ApiResponse<?> getCarouselArticleList() {
