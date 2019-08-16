@@ -15,7 +15,7 @@
         <!--这里是以变量的形式定义，具体的值在 application.properties 文件中-->
         <!--jdbc:mysql://localhost:3306/数据库名?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/picadb?serverTimezone=UTC"
+                        connectionURL="jdbc:mysql://192.168.121.132:3307/picadb?serverTimezone=UTC"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -54,6 +54,9 @@
         </table>
         <table tableName="bank_info" domainObjectName="BankInfoEntity">
             <generatedKey column="bankId" sqlStatement="MySql" identity="true"></generatedKey>
+        </table>
+        <table tableName="res_type_info" domainObjectName="ResTypeInfoEntity">
+            <generatedKey column="idres_type_info" sqlStatement="MySql" identity="true"></generatedKey>
         </table>
         <table tableName="questions" domainObjectName="QuestionEntity">
             <generatedKey column="question_id" sqlStatement="MySql" identity="true"></generatedKey>
