@@ -50,7 +50,7 @@ public class GradeController {
             @RequestParam("bankId") int bankId,
             @ApiParam(name = "grade", value = "成绩", required = true, defaultValue = "0")
             @RequestParam("grade") int grade,
-            @ApiParam(name = "grade", value = "总分", required = true, defaultValue = "0")
+            @ApiParam(name = "total", value = "总分", required = true, defaultValue = "0")
             @RequestParam("total") int total
     ) {
         int res = gradeService.setGrade(openid,bankId,grade,total);
